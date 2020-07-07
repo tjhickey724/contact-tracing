@@ -65,6 +65,12 @@ app.get("/demo", (req, res) => {
   res.render("demo");
 });
 
+
+app.get('/showformdata', (request,response) => {
+  const data = request.body
+  response.json(data)
+})
+
 // Don't change anything below here ...
 
 // here we catch 404 errors and forward to error handler
