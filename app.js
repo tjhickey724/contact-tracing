@@ -65,6 +65,10 @@ app.get("/demo", (req, res) => {
   res.render("demo");
 });
 
+app.get("/about", (req, res) => {
+  res.render("about");
+});
+
 
 app.get('/showformdata', (request,response) => {
   const data = request.body
