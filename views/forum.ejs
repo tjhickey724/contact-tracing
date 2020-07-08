@@ -11,4 +11,16 @@
   <input type="submit">
 </form>
 
+<% posts.forEach(x => {%> 
+   Topic: <%= x.topic %> <br>
+   Messsage: <%= x.message %> <br>
+   Time: <%= x.date %>
+   User: <%= x.username %>
+   
+<% }) %>
+
+<pre>
+ <%= JSON.stringify(posts,null,2) %>
+</pre>
+
 <%- include('bootfooter') -%>

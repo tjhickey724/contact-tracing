@@ -74,9 +74,15 @@ app.get('/forum', (req,res) => {
   res.render('forum')
 })
 
-let 
+let forumPosts = []
+
 app.post("/addToForum", (req,res) => {
-  res.json(req.body)
+  req.body.date = new Date()
+  req.body.username = res.locals.username
+  forumPosts = forumPosts.concat(req.body)
+  res.locals.posts = forumPosts
+  res.render("forum")
+  //res.json(forumPosts)
 })
 
 
