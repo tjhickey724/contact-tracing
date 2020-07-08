@@ -3,5 +3,21 @@
   <h1>This is the Demo page</h1>
   <p> This is a paragraph </p>
 
+<h3>
+   <%= message %>
+</h3>
+
+<% if (loggedIn) { %>
+
+   Welcome 
+   <%= username %>
+   <br>
+  The magic number for today is <%= magicNumber %>
+
+<% } else { %>
+
+   Please log in to use this page ...
+
+<% } %>
 
 <%- include('bootfooter') -%>
