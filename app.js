@@ -93,7 +93,17 @@ app.get('/startGame', (req,res) => {
   res.render("startGame") // form to get gamename and list of users ...
 })
 
-let games = []
+let games = [
+  {roomname:"789sdfs",
+   members:"tim david sean",
+   mafia:"tim",
+   detective:"david",
+   dead:[],
+   revealed:[],
+   time:'daytime',
+   daylength:300,
+  }
+]
 app.post('/createGame', (req,res) => {
   const gameInfo = req.body
   games = games.concat(gameInfo)
