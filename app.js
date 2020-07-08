@@ -89,6 +89,32 @@ app.post("/addToForum", (req,res) => {
   //res.json(forumPosts)
 })
 
+app.get('/startGame', (req,res) => {
+  res.render("startGame") // form to get gamename and list of users ...
+})
+
+let games = []
+app.post('/createGame', (req,res) => {
+  const gameInfo = req.body
+  games = games.concat(gameInfo)
+  res.locals.games = games
+  res.json(games)
+  //res.render('showGames')
+})
+
+const User = require('./models/User')
+app.get('/showUsers', 
+  async (req,res,next) => {
+    try{
+      const users = await User.find()
+      res.json(users)
+    } catch(error){
+      next(error)
+    }
+})
+
+
+
 
 app.get("/about", (req, res) => {
   res.render("about");
