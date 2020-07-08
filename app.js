@@ -61,8 +61,10 @@ app.get("/", (req, res, next) => {
   res.render("index", { title: "YellowCartwheel" });
 });
 
+
+
 let counter=0
-app.get("/demo", (req, res) => {
+app.get("/demo", isLoggedIn, (req, res) => {
   if (!req.session.counter){
     req.session.counter=1
   } else {
@@ -73,8 +75,18 @@ app.get("/demo", (req, res) => {
   res.locals.sessionCounter = req.session.counter
   res.locals.session = req.session
   res.locals.message = "THIS IS A TEST MESSAGE"
+  res.locals.forum = forum
   res.render("demo");
 });
+
+
+let forum=[]
+
+app.post('/addToForum', (req,res) => {
+  forum = forum.concat(req.body)
+  res.redirect('/demo')
+  //res.json(forum)
+})
 
 app.get("/about", (req, res) => {
   res.render("about");
