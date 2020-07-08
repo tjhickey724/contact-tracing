@@ -81,8 +81,7 @@ app.post("/addToForum", (req,res) => {
   req.body.date = new Date()
   req.body.username = res.locals.username
   forumPosts = forumPosts.concat(req.body)
-  res.locals.posts = forumPosts.reverse()
-  res.render("forum")
+  res.redirect('/forum')
   //res.json(forumPosts)
 })
 
