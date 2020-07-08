@@ -61,7 +61,18 @@ app.get("/", (req, res, next) => {
   res.render("index", { title: "YellowCartwheel" });
 });
 
+let counter=0
 app.get("/demo", (req, res) => {
+  if (!req.session.counter){
+    req.session.counter=1
+  } else {
+    req.session.counter += 1
+  }
+  counter = counter+1
+  res.locals.counter = counter
+  res.locals.sessionCounter = req.session.counter
+  res.locals.session = req.session
+  res.locals.message = "THIS IS A TEST MESSAGE"
   res.render("demo");
 });
 

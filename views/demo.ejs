@@ -2,4 +2,18 @@
 <%- include('menubar') -%>
   <h1>This is the Demo page</h1>
   <p> This is a paragraph </p>
+
+<% if (loggedIn) {%>  
+Welcome <%= username %> <br>
+<% } else { %>  
+Please go to <a href="/login"> the login page.</a>
+<% } %>
+This page has been visited <%= counter %> times total,
+and <%= sessionCounter %> times by you in this session. <br>
+<pre>
+<%= JSON.stringify(session, null, 4) %>
+</pre>
+
+
+
 <%- include('bootfooter') -%>
