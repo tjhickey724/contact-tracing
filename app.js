@@ -70,15 +70,16 @@ app.get("/demo", (request, response) => {
   response.render("demo");
 });
 
+let forumPosts = [ 
+  {topic:'school',message:'working on project',username:'tim',date:new Date()},
+  {topic:'home',message:'better sleep well tonight',username:'tim',date:new Date()}
+]
+
 app.get('/forum', (req,res) => {
   res.locals.posts = forumPosts.reverse()
   res.render('forum')
 })
 
-let forumPosts = [
-  {topic:'school',message:'working on project',username:'tim',date:new Date()},
-  {topic:'home',message:'better sleep well tonight',username:'tim',date:new Date()}
-]
 
 app.post("/addToForum", (req,res) => {
   req.body.date = new Date()

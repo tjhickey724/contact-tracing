@@ -25,7 +25,7 @@
 </h3>
 <ul>
   <% posts.forEach(x => {%>  
-    <li><%= x.message %></li>
+    <li><%= x.message %> <%= x.topic %> <%= x.username %> <%= x.date %> </li>
   <% }) %>
 </ul>
 <hr>
