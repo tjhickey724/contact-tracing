@@ -11,18 +11,26 @@
   <input type="submit">
 </form>
 
-<ol>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>user</th><th>topic</th><th>message</th>
+    </tr>
+  </thead>
+  <tbody>
+
 <% posts.forEach(x => {%> 
   
-  <li>
-   Topic: <%= x.topic %> <br>
-   Messsage: <%= x.message %> <br>
-   Time: <%= x.date %>
-   User: <%= x.username %>
-  </li>
+  <tr>
+           <td><%= x.username %></td> 
+           <td><%= x.topic %></td>
+           <td><%= x.message %></td>
+           
+  </tr>
   
 <% }) %>
-</ol>
+  </tbody>
+</table>
 
 <pre>
  <%= JSON.stringify(posts,null,2) %>
