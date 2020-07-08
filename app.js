@@ -64,7 +64,7 @@ app.get("/", (req, res, next) => {
 
 
 app.get("/demo", (request, response) => {
-  response.locals.message = "Welcome to the Demo page"
+  response.locals.message = "Welcome to the Demo page. I am a message!"
   response.locals.magicNumber = 24
   
   response.render("demo");
