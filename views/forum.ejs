@@ -10,7 +10,15 @@
   Your message: <input type="text" name="message"><br>
   <input type="submit">
 </form>
+<h3>Here are all of the messages:</h3>
+<% posts.forEach(x => {%>  
+   <%= x.message %>,
+<% }) %>
+and here as a list
 
+<h3>
+  Here are the messages as a table
+</h3>
 <table class="table table-bordered table-striped">
   <thead>
     <tr>
@@ -18,16 +26,12 @@
     </tr>
   </thead>
   <tbody>
-
-<% posts.forEach(x => {%> 
-  
+<% posts.forEach(x => {%>  
   <tr>
            <td><%= x.username %></td> 
            <td><%= x.topic %></td>
-           <td><%= x.message %></td>
-           
-  </tr>
-  
+           <td><%= x.message %></td>           
+  </tr> 
 <% }) %>
   </tbody>
 </table>
