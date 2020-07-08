@@ -11,13 +11,18 @@
   <input type="submit">
 </form>
 
+<ol>
 <% posts.forEach(x => {%> 
+  
+  <li>
    Topic: <%= x.topic %> <br>
    Messsage: <%= x.message %> <br>
    Time: <%= x.date %>
    User: <%= x.username %>
-   
+  </li>
+  
 <% }) %>
+</ol>
 
 <pre>
  <%= JSON.stringify(posts,null,2) %>

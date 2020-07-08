@@ -71,6 +71,7 @@ app.get("/demo", (request, response) => {
 });
 
 app.get('/forum', (req,res) => {
+  res.locals.posts = forumPosts.reverse()
   res.render('forum')
 })
 
@@ -80,7 +81,7 @@ app.post("/addToForum", (req,res) => {
   req.body.date = new Date()
   req.body.username = res.locals.username
   forumPosts = forumPosts.concat(req.body)
-  res.locals.posts = forumPosts
+  res.locals.posts = forumPosts.reverse()
   res.render("forum")
   //res.json(forumPosts)
 })
