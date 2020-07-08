@@ -2,31 +2,6 @@
 <%- include('menubar') -%>
   <h1>This is the Demo page</h1>
   <p> This is a paragraph </p>
-<h2>
-  <%= message %>
-</h2>
-<% if (loggedIn) {%>  
-Welcome <%= username %> <br>
-<% } else { %>  
-Please go to <a href="/login"> the login page.</a>
-<% } %>
-This page has been visited <%= counter %> times total,
-and <%= sessionCounter %> times by you in this session. <br>
-<pre>
-<%= JSON.stringify(session, null, 4) %>
-</pre>
-<hr>
-<form method="post" action="/addToForum">
-  title:        <input type="text" name="title"  ><br>
-  your comment: <input type="text" name="comment"><br>
-  <input type="submit">
-</form>
-
-<% forum.forEach( x => {%> 
-<%= x.title %>: <%= x.comment %>
-<hr>
-<% }) %>
-
 
 
 <%- include('bootfooter') -%>

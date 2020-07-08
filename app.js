@@ -63,30 +63,10 @@ app.get("/", (req, res, next) => {
 
 
 
-let counter=0
-app.get("/demo", isLoggedIn, (req, res) => {
-  if (!req.session.counter){
-    req.session.counter=1
-  } else {
-    req.session.counter += 1
-  }
-  counter = counter+1
-  res.locals.counter = counter
-  res.locals.sessionCounter = req.session.counter
-  res.locals.session = req.session
-  res.locals.message = "THIS IS A TEST MESSAGE"
-  res.locals.forum = forum
+app.get("/demo", (req, res) => {
   res.render("demo");
 });
 
-
-let forum=[]
-
-app.post('/addToForum', (req,res) => {
-  forum = forum.concat(req.body)
-  res.redirect('/demo')
-  //res.json(forum)
-})
 
 app.get("/about", (req, res) => {
   res.render("about");
