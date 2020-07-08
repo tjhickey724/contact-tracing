@@ -70,6 +70,15 @@ app.get("/demo", (request, response) => {
   response.render("demo");
 });
 
+app.get('/forum', (req,res) => {
+  res.render('forum')
+})
+
+let 
+app.post("/addToForum", (req,res) => {
+  res.json(req.body)
+})
+
 
 app.get("/about", (req, res) => {
   res.render("about");

@@ -1,0 +1,14 @@
+<%- include('bootheader') -%>
+<%- include('menubar') -%>
+
+<form method="post" action="/addToForum">
+  Topic: 
+  <select name="topic">
+   <option>school</option>
+   <option>home</option>
+  </select>
+  Your message: <input type="text" name="message"><br>
+  <input type="submit">
+</form>
+
+<%- include('bootfooter') -%>
