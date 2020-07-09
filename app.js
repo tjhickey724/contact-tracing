@@ -69,8 +69,31 @@ app.use(games)
 
 
 app.get("/", (req, res, next) => {
-  res.render("index", { title: "YellowCartwheel" });
+  res.render("index");
 });
+
+app.get("/time", (req,res,next) => {
+  res.send("The time is now!")
+})
+
+app.get("/gohome", (req,res,next) => {
+  res.redirect('/')
+})
+
+app.get("/jtime", (req,res,next) => {
+  const now = new Date()
+  res.json(now)
+})
+
+app.get("/aboutPage", (req,res,next) => {
+  res.render("about")
+})
+
+app.get("/greeting/:name", (req,res,next) => {
+  const nombre = req.params.name
+  res.send("hello "+nombre)
+})
+
 
 
 
