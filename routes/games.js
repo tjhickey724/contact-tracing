@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios')
 
-const GameAnswer = require('./models/GameAnswer')
+const GameAnswer = require('../models/GameAnswer')
 
 /*
   WORK IN PROGRESS!!
@@ -76,6 +76,7 @@ router.post('/playingGame',
           {username:res.locals.username,
            gamePIN:gamePIN,
            answer:answer})
+        await gameAnswer.save()
       }
       res.render('gamePlaying')
     } catch(error){next(error)}

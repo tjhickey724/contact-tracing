@@ -3,5 +3,8 @@
 <h1>
   GamePIN is <%= gamePIN %>
 </h1>
-
+<% answers.forEach( x => {%> 
+  <%= JSON.stringify(x) %> 
+<br>
+<% }) %>
 <%- include('bootfooter') -%>
