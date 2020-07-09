@@ -7,7 +7,8 @@ const Schema = mongoose.Schema;
 var gameAnswerSchema = Schema( {
   gamePIN: String,
   username: String,
-  answer: String
+  answer: String,
+  messageFromAdmin: String
 } );
 
 module.exports = mongoose.model( 'GameAnswerTeam0', gameAnswerSchema );

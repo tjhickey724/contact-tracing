@@ -13,7 +13,15 @@
 <% answers.forEach( x => {%> 
   <hr>
   <%= x.username %>: <%= x.answer %>
+  <form method="post" action="/sendPrivateMessage">
+    <input type="hidden" name="user" value="<%= x.username %>">
+    <input type="hidden" name="gamePIN" value="<%= x.gamePIN %>">
+    message: <input type="text" name="privateMessage"><br>
+    <input type="submit">
+  </form>
+   <!--  have a form for selecting a user as a detective, doctor, mafia -->
 <% }) %>
+
   <hr>
 <a href="/endGame/<%= gamePIN %>">End this game</a>
 <%- include('bootfooter') -%>
