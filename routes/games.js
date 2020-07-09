@@ -11,6 +11,7 @@ const axios = require('axios')
   
   The idea is that a loggedIn user goes to startGame and
   this creates a new game object in the Game database
+  Game Schema ...
      {gamePIN:String,state:???}
   
   This object has a gamePIN which the other players will type in
@@ -27,7 +28,7 @@ const axios = require('axios')
   a site "/playingGame/gamePIN"
   
   This has a form which allows them to type in a string which gets stored
-  in the Answer database with the gamePIN and the username.
+  in the GameAnswer database with the gamePIN and the username.
      {gamePIN:String, username:String, answer:String}
   The users can update their answer at any time and it appear on the main screen. 
   
@@ -37,7 +38,8 @@ router.get('/startGame',(req,res,next) => {res.render('gameStart')})
 router.post('/startGame',
   async (req,res,next) => {
     try{
-      res.send("work in progress")
+      const gamePIN = Math.round(10000000*Math.random())
+      res.redirect('gameScreen/'+gamePIN)
     } catch(error){next(error)}
 })
 
@@ -46,16 +48,18 @@ router.get('/gameScreen/:gamePIN',
   async (req,res,next) => {
     try {
       const gamePIN = req.params.gamePIN
+      res.locals.gamePIN = gamePIN
       res.render('gameScreen')
     } catch(error) { next(error)}
 })
 
-router.get('/playGame',(req,res,next) => {res.render('playGame')})
+router.get('/playGame',(req,res,next) => {res.render('gameJoin')})
 
-router.get('/playingGame/:gamePIN',
+router.post('/playingGame',
   async (req,res,next) => {
     try {
-      const gamePIN = req.params.gamePIN
+      const gamePIN = req.body.gamePIN
+      res.locals.gamePIN = gamePIN
       res.render('gamePlaying')
     } catch(error){next(error)}
 })

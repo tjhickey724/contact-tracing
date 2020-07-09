@@ -63,6 +63,9 @@ app.use(auth)
 const recipes = require('./routes/recipes')
 app.use(recipes)
 
+const games = require('./routes/games')
+app.use(games)
+
 
 
 app.get("/", (req, res, next) => {

@@ -1,0 +1,14 @@
+<%- include('bootheader') -%>
+<%- include('menubar') -%>
+<h1>
+  Play the game
+</h1>
+Type in your move and hit submit! <br>
+<%= new Date() %><br>
+<form method="post" action="/playingGame">
+  <input type="hidden" name="gamePIN" value="<%= gamePIN %>"><br>
+  Your move: <input type="text" name="move"><br>
+  
+  <input type="submit">
+</form>
+<%- include('bootfooter') -%>
