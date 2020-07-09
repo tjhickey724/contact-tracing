@@ -12,25 +12,6 @@
 </form>
 
 
-
-<h3>Here are all of the messages in one line</h3>
-<% posts.forEach(x => {%>  
-   <%= x.message %>,
-<% }) %>
-<hr>
-
-
-<h3>
-  Here are the messages as a list
-</h3>
-<ul>
-  <% posts.forEach(x => {%>  
-    <li><%= x.message %> <%= x.topic %> <%= x.username %> <%= x.date %> </li>
-  <% }) %>
-</ul>
-<hr>
-
-
 <h3>
   Here are the messages as a table
 </h3>
@@ -43,7 +24,7 @@
   <tbody>
 <% posts.forEach(x => {%>  
   <tr>
-           <td><%= x.username %></td> 
+           <td><%= x.author %></td> 
            <td><%= x.topic %></td>
            <td><%= x.message %></td>  
            <td><%= x.date %></td> 

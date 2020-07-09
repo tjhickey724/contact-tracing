@@ -137,9 +137,8 @@ const ForumPost = require("./models/ForumPost")
 app.get('/forum', 
   async (req,res,next) => {
    try{
-      res.locals.posts = await ForumPost.find() //.sort({date:-1})
-      res.render('forum')
-     
+      res.locals.posts = await ForumPost.find().sort({date:-1}).limit(5)
+      res.render('forum')   
    } catch(error) {next(error)}
 
 })
