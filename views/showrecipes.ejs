@@ -1,0 +1,22 @@
+<%- include('bootheader') -%>
+<%- include('menubar') -%>
+<h1>
+  Show Recipes
+</h1>
+<form method="post" action="/showrecipes">
+  meal: 
+      <input type="text" name="meal"><br>
+  ingredients (separated by commas)
+      <input type="text" name="ingredients"><br>
+  <input type="submit"
+</form>
+  
+  <% recipes.forEach(x => {%>  
+  <%= x.title %><br>
+  <%= x.ingredients %> <br>
+  <%= x.href %><br>
+  <%= x.thumbnail %><br>
+  <hr>
+  
+  <% }) %>
+<%- include('bootfooter') -%>

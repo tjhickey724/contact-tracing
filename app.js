@@ -54,9 +54,17 @@ app.use(
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
+
+// here we handle some routes in their own routing file
+// this keeps the main app.js more organized ...
 const auth = require('./routes/auth')
 app.use(auth)
-// here we start handling routes
+
+const recipes = require('./routes/recipes')
+app.use(recipes)
+
+
+
 app.get("/", (req, res, next) => {
   res.render("index", { title: "YellowCartwheel" });
 });

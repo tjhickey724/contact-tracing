@@ -1,13 +1,23 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const axios = require('axios')
 
+/*
+  Here is an example of having your app get answers from an API
+*/
 router.get('/recipe',(req,res,next) => {res.render('recipe')})
 
-router.post('/recipe',
+router.post('/showrecipes',
   async (req,res,next) => {
     try{
+      console.log("inside show recipes")
+      console.log(JSON.stringify(req.body),null,4)
       const {meal,ingredients} = req.body  // get meal and ingredients from form
-      const url= `http://www.recipepuppy.com/api/?i=${ingredients}&q=steak&p=3`
-      const result = await axios.get()
+      const url= `http://www.recipepuppy.com/api/?i=${ingredients}&q=${meal}&p=1`
+      const result = await axios.get(url)
+      res.locals.recipes = result.results
+      res.render('showrecipes')
     } catch(error){next(error)}
 })
+
+module.exports = router
