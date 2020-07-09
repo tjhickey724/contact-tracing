@@ -11,7 +11,7 @@ const axios = require('axios')
   
   The idea is that a loggedIn user goes to startGame and
   this creates a new game object in the Game database
-     {gamePIN:String,state:Mixed}
+     {gamePIN:String,state:???}
   
   This object has a gamePIN which the other players will type in
   when they visit "/playGame"
@@ -28,6 +28,8 @@ const axios = require('axios')
   
   This has a form which allows them to type in a string which gets stored
   in the Answer database with the gamePIN and the username.
+     {gamePIN:String, username:String, answer:String}
+  The users can update their answer at any time and it appear on the main screen. 
   
 */
 router.get('/startGame',(req,res,next) => {res.render('startGame')})
@@ -38,6 +40,7 @@ router.post('/startGame',
       res.send("work in progress")
     } catch(error){next(error)}
 })
+
 
 router.get('/gameScreen/:gamePIN',
   async (req,res,next) => {
@@ -64,5 +67,32 @@ router.post('/playingGame/:gamePIN',
       res.send("work in progress")
     } catch(error){next(error)}
 })
+
+
+// CODE for Mafia game ....
+/*
+router.get('/startGame', (req,res) => {
+  res.render("startGame") // form to get gamename and list of users ...
+})
+
+let games = [
+  {roomname:"789sdfs",
+   members:"tim david sean",
+   mafia:"tim",
+   detective:"david",
+   dead:[],
+   revealed:[],
+   time:'daytime',
+   daylength:300,
+  }
+]
+router.post('/createGame', (req,res) => {
+  const gameInfo = req.body
+  games = games.concat(gameInfo)
+  res.locals.games = games
+  res.json(games)
+  //res.render('showGames')
+})
+*/
 
 module.exports = router

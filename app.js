@@ -97,28 +97,7 @@ app.post("/addToForum", (req,res) => {
   //res.json(forumPosts)
 })
 
-app.get('/startGame', (req,res) => {
-  res.render("startGame") // form to get gamename and list of users ...
-})
 
-let games = [
-  {roomname:"789sdfs",
-   members:"tim david sean",
-   mafia:"tim",
-   detective:"david",
-   dead:[],
-   revealed:[],
-   time:'daytime',
-   daylength:300,
-  }
-]
-app.post('/createGame', (req,res) => {
-  const gameInfo = req.body
-  games = games.concat(gameInfo)
-  res.locals.games = games
-  res.json(games)
-  //res.render('showGames')
-})
 
 const User = require('./models/User')
 app.get('/showUsers', 
@@ -143,6 +122,8 @@ app.get('/showformdata', (request,response) => {
   const data = request.body
   response.json(data)
 })
+
+
 
 // Don't change anything below here ...
 
