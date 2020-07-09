@@ -94,6 +94,11 @@ app.get("/greeting/:name", (req,res,next) => {
   res.send("hello "+nombre)
 })
 
+app.get("/testing/:year", (req,res,next) => {
+  const yearNumber = req.params.year
+  res.send(yearNumber + " was a memorable year!")
+})
+
 
 
 
