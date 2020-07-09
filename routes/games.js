@@ -35,9 +35,19 @@ const GameAnswer = require('../models/GameAnswer')
   The users can update their answer at any time and it appear on the main screen. 
   
 */
-router.get('/startGame',(req,res,next) => {res.render('gameStart')})
 
-router.post('/startGame',
+const loggedIn = (req,res,next) => {
+  if (res.locals.user) {
+    next()
+  } else {
+    res.redirect('/login')
+  }
+}
+
+router.get('/startGame', loggedIn,
+  (req,res,next) => {res.render('gameStart')})
+
+router.post('/startGame', loggedIn,
   async (req,res,next) => {
     try{
       const gamePIN = Math.round(10000000*Math.random())
@@ -46,7 +56,7 @@ router.post('/startGame',
 })
 
 
-router.get('/gameScreen/:gamePIN',
+router.get('/gameScreen/:gamePIN', loggedIn,
   async (req,res,next) => {
     try {
       const gamePIN = req.params.gamePIN
@@ -56,37 +66,56 @@ router.get('/gameScreen/:gamePIN',
     } catch(error) { next(error)}
 })
 
-router.get('/playGame',(req,res,next) => {res.render('gameJoin')})
+router.get('/playGame', loggedIn,
+           (req,res,next) => {res.render('gameJoin')})
 
-router.post('/playingGame',
+router.post('/playingGame', loggedIn,
   async (req,res,next) => {
     try {
       const gamePIN = req.body.gamePIN
       res.locals.gamePIN = gamePIN
-      const answer = req.body.answer || "hello"
+      const answer = req.body.answer || "hello again"
+      console.log(`in playingGame ${gamePIN} ${answer} ${res.locals.username}`)
       let gameAnswer = 
              await GameAnswer.findOne(
                {gamePIN:gamePIN, 
                 username:res.locals.username})
       if (gameAnswer){
+        console.log("found an answer ...")
+        //console.dir(gameAnswer)
         gameAnswer.answer = answer
         await gameAnswer.save()
+        //console.dir(gameAnswer)
       } else {
+        //console.log("didn't find any answers")
         gameAnswer = new GameAnswer(
           {username:res.locals.username,
            gamePIN:gamePIN,
            answer:answer})
         await gameAnswer.save()
+        //console.log("created a new GameAnswer object")
       }
       res.render('gamePlaying')
-    } catch(error){next(error)}
+    } catch(error){
+        console.log("whoops!! an error in gamePlaying")
+        next(error)
+    }
 })
 
-router.post('/playingGame/:gamePIN',
+router.post('/playingGame/:gamePIN', loggedIn,
   async (req,res,next) => {
     try{
       const gamePIN = req.params.gamePIN
       res.send("work in progress")
+    } catch(error){next(error)}
+})
+
+router.get("/endGame/:gamePin", loggedIn,
+  async (req,res,next) => {
+    try{
+      const gamePIN = req.params.gamePIN
+      await GameAnswer.deleteMany({gamePIN:gamePIN})
+      res.redirect('/startGame')
     } catch(error){next(error)}
 })
 

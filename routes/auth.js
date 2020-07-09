@@ -59,8 +59,6 @@ router.post('/signup',
       const {username,passphrase,passphrase2} = req.body
       if (passphrase != passphrase2){
         res.redirect('/login')
-      }else if (passphrase.split(' ').length < 5) {
-        res.redirect('/login')
       }else {
         const hash = crypto.createHash('sha256');
         hash.update(passphrase);

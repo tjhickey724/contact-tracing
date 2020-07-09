@@ -1,10 +1,13 @@
-<%- include('bootheader') -%>
+<%- include('bootheaderRefresh') -%>
 <%- include('menubar') -%>
 <h1>
   GamePIN is <%= gamePIN %>
 </h1>
+<%= new Date() %><br>
 <% answers.forEach( x => {%> 
-  <%= JSON.stringify(x) %> 
-<br>
+  <hr>
+  <%= x.username %>: <%= x.answer %>
 <% }) %>
+  <hr>
+<a href="/endGame/<%= gamePIN %>">End this game</a>
 <%- include('bootfooter') -%>
