@@ -10,4 +10,4 @@ var gameAnswerSchema = Schema( {
   answer: String
 } );
 
-module.exports = mongoose.model( 'Team0', userSchema );
+module.exports = mongoose.model( 'GameAnswerTeam0', gameAnswerSchema );

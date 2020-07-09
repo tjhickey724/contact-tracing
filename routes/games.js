@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios')
 
+const GameAnswer = require('./models/GameAnswer')
+
 /*
   WORK IN PROGRESS!!
 
@@ -49,6 +51,7 @@ router.get('/gameScreen/:gamePIN',
     try {
       const gamePIN = req.params.gamePIN
       res.locals.gamePIN = gamePIN
+      res.locals.answers = await GameAnswer.find({gamePIN:gamePIN})
       res.render('gameScreen')
     } catch(error) { next(error)}
 })
@@ -60,6 +63,20 @@ router.post('/playingGame',
     try {
       const gamePIN = req.body.gamePIN
       res.locals.gamePIN = gamePIN
+      const answer = req.body.answer || "hello"
+      let gameAnswer = 
+             await GameAnswer.findOne(
+               {gamePIN:gamePIN, 
+                username:res.locals.username})
+      if (gameAnswer){
+        gameAnswer.answer = answer
+        await gameAnswer.save()
+      } else {
+        gameAnswer = new GameAnswer(
+          {username:res.locals.username,
+           gamePIN:gamePIN,
+           answer:answer})
+      }
       res.render('gamePlaying')
     } catch(error){next(error)}
 })
