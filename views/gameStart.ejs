@@ -1,0 +1,16 @@
+<%- include('bootheader') -%>
+<%- include('menubar') -%>
+<h1>
+  Game Start
+</h1>
+Press the button below to play a game:
+<form method="post" action="/startGame">
+  game: 
+  <select name="game">
+    <option>mafia</option>
+    <option>quiz</option>
+    <option>poker</option>
+  </select>
+  <input type="submit">
+</form>
+<%- include('bootfooter') -%>

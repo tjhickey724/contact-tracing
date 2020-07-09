@@ -32,7 +32,7 @@ const axios = require('axios')
   The users can update their answer at any time and it appear on the main screen. 
   
 */
-router.get('/startGame',(req,res,next) => {res.render('startGame')})
+router.get('/startGame',(req,res,next) => {res.render('gameStart')})
 
 router.post('/startGame',
   async (req,res,next) => {
@@ -56,7 +56,7 @@ router.get('/playingGame/:gamePIN',
   async (req,res,next) => {
     try {
       const gamePIN = req.params.gamePIN
-      res.render('playingGame')
+      res.render('gamePlaying')
     } catch(error){next(error)}
 })
 
