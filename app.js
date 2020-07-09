@@ -99,6 +99,10 @@ app.get("/testing/:year", (req,res,next) => {
   res.send(yearNumber + " was a memorable year!")
 })
 
+app.get("/bio/tim", (req,res,next) => {
+  res.render("tim")
+})
+
 
 
 
