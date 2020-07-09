@@ -117,12 +117,11 @@ let forumPosts = [
   {topic:'school',message:'working on project',username:'tim',date:new Date()},
   {topic:'home',message:'better sleep well tonight',username:'tim',date:new Date()}
 ]
-
+/*
 app.get('/forum', (req,res) => {
   res.locals.posts = forumPosts.reverse()
   res.render('forum')
 })
-
 
 app.post("/addToForum", (req,res) => {
   req.body.date = new Date()
@@ -130,6 +129,34 @@ app.post("/addToForum", (req,res) => {
   forumPosts = forumPosts.concat(req.body)
   res.redirect('/forum')
   //res.json(forumPosts)
+})
+*/
+
+const ForumPost = require("./models/ForumPost")
+
+app.get('/forum', 
+  async (req,res,next) => {
+   try{
+      res.locals.posts = await ForumPost.find() //.sort({date:-1})
+      res.render('forum')
+     
+   } catch(error) {next(error)}
+
+})
+
+app.post("/addToForum", 
+  async (req,res,next) => {
+    try{
+        const forumPost = 
+        new ForumPost(
+          {topic:req.body.topic,
+           message: req.body.message,
+           author: res.locals.username || "anonymous",
+           date: new Date()})
+        await forumPost.save()
+        res.redirect('/forum')
+      
+    }catch(error){next(error)}
 })
 
 
