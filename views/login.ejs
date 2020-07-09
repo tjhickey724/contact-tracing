@@ -2,6 +2,7 @@
 <%- include('menubar') -%>
 
     <div class="row">
+      
         <div class="col-sm-5">
             <h2>Login</h2>
             <form method="post" action="/login">
@@ -14,9 +15,11 @@
                 <input type="submit">
             </form>
         </div>
+      
         <div class="col-sm-2" style="text-align:center">
             OR
         </div>
+      
         <div class="col-sm-5">
             <h2>Signup</h2>
             <form method="post" action="/signup">
@@ -25,6 +28,10 @@
                    <input type="password" autocomplete="passphrase" name="passphrase"><br>
                 confirm passphrase:
                     <input type="password" name="passphrase2"><br>
+              
+                age: <input type="number" name="age"><br>
+              
+              
                 <input type="submit">
             </form>
         </div>

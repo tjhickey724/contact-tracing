@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const crypto = require('crypto')
 const User = require('../models/User')
 
@@ -56,14 +56,20 @@ router.post('/login',
 router.post('/signup',
   async (req,res,next) =>{
     try {
-      const {username,passphrase,passphrase2} = req.body
+      const {username,passphrase,passphrase2,age} = req.body
       if (passphrase != passphrase2){
         res.redirect('/login')
       }else {
         const hash = crypto.createHash('sha256');
         hash.update(passphrase);
         const encrypted = hash.digest('hex')
-        const user = new User({username:username,passphrase:encrypted})
+        
+        const user = new User(
+          {username:username,
+           passphrase:encrypted,
+           age:age
+          })
+        
         await user.save()
         req.session.username = user.username
         req.session.user = user
