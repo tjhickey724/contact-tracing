@@ -140,7 +140,6 @@ app.get('/forum',
       res.locals.posts = await ForumPost.find().sort({date:-1}).limit(5)
       res.render('forum')   
    } catch(error) {next(error)}
-
 })
 
 app.post("/addToForum", 
@@ -153,8 +152,7 @@ app.post("/addToForum",
            author: res.locals.username || "anonymous",
            date: new Date()})
         await forumPost.save()
-        res.redirect('/forum')
-      
+        res.redirect('/forum')     
     }catch(error){next(error)}
 })
 

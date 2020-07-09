@@ -3,6 +3,7 @@ const router = express.Router();
 const axios = require('axios')
 
 const GameAnswer = require('../models/GameAnswer')
+const GameState = require('../models/GameState')
 
 /*
   WORK IN PROGRESS!!
@@ -51,6 +52,9 @@ router.post('/startGame', loggedIn,
   async (req,res,next) => {
     try{
       const gamePIN = Math.round(10000000*Math.random())
+      const gameState = 
+            new GameState(
+              {gamePIN:gamePIN,status:'start',state:'start',stage:0})
       res.redirect('gameScreen/'+gamePIN)
     } catch(error){next(error)}
 })
@@ -119,6 +123,21 @@ router.get("/endGame/:gamePin", loggedIn,
     } catch(error){next(error)}
 })
 
+router.get("/showGameAnswers",
+  async (req,res,next) => {
+    try {
+      const answers = await GameAnswer.find()
+      res.json(answers)
+    } catch(error) { next(error)}
+})
+
+router.get("/showGameStates",
+  async (req,res,next) => {
+    try {
+      const results = await GameState.find()
+      res.json(results)
+    } catch(error) { next(error)}
+})
 
 // CODE for Mafia game ....
 /*
