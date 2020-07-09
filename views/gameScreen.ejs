@@ -1,4 +1,4 @@
-<%- include('bootheaderRefresh') -%>
+<%- include('bootheader') -%>
 <%- include('menubar') -%>
 <h1>
   GamePIN is <%= gamePIN %>
@@ -7,6 +7,8 @@
 <%= state.status %>
 <%= state.state %>
 <%= state.stage %>
+<!-- add a form to send a private message to a username -->
+
 <hr>
 <% answers.forEach( x => {%> 
   <hr>
