@@ -4,6 +4,10 @@
   GamePIN is <%= gamePIN %>
 </h1>
 <%= new Date() %><br>
+<%= state.status %>
+<%= state.state %>
+<%= state.stage %>
+<hr>
 <% answers.forEach( x => {%> 
   <hr>
   <%= x.username %>: <%= x.answer %>

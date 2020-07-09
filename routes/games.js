@@ -45,10 +45,12 @@ const loggedIn = (req,res,next) => {
   }
 }
 
-router.get('/startGame', loggedIn,
+router.get('/startGame', 
+  loggedIn,
   (req,res,next) => {res.render('gameStart')})
 
-router.post('/startGame', loggedIn,
+router.post('/startGame', 
+  loggedIn,
   async (req,res,next) => {
     try{
       const gamePIN = Math.round(10000000*Math.random())
@@ -65,6 +67,7 @@ router.get('/gameScreen/:gamePIN', loggedIn,
     try {
       const gamePIN = req.params.gamePIN
       res.locals.gamePIN = gamePIN
+      res.locals.state = await GameState.find({gamePIN:gamePIN})
       res.locals.answers = await GameAnswer.find({gamePIN:gamePIN})
       res.render('gameScreen')
     } catch(error) { next(error)}
