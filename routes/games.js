@@ -56,7 +56,12 @@ router.post('/startGame',
       const gamePIN = Math.round(10000000*Math.random())
       const gameState = 
             new GameState(
-              {gamePIN:gamePIN,status:'start',state:'start',stage:0})
+              {gamePIN:gamePIN,
+               status:'start',
+               state:'start',
+               stage:0,
+               owner:res.locals.user.email,
+              })
       res.redirect('gameScreen/'+gamePIN)
     } catch(error){next(error)}
 })
@@ -81,6 +86,8 @@ router.post('/playingGame', loggedIn,
     try {
       const gamePIN = req.body.gamePIN
       res.locals.gamePIN = gamePIN
+      const gameState = await GameState.findOne({gamePIN:gamePIN})
+      res.locals.isAdmin = (gameState.email == res.locals.user.email)
       const answer = req.body.answer || "hello again"
       console.log(`in playingGame ${gamePIN} ${answer} ${res.locals.username}`)
       let gameAnswer = 
@@ -102,7 +109,9 @@ router.post('/playingGame', loggedIn,
         await gameAnswer.save()
         //console.log("created a new GameAnswer object")
       }
+      
       res.render('gamePlaying')
+      
     } catch(error){
         console.log("whoops!! an error in gamePlaying")
         next(error)

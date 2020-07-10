@@ -6,7 +6,8 @@ var schema = Schema( {
   gamePIN: String,
   status: String,
   state: String,
-  stage: Number
+  stage: Number,
+  owner: String,
 } );
 
 module.exports = mongoose.model( 'GameStateTeam0', schema );

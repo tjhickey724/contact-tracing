@@ -11,4 +11,12 @@ Type in your move and hit submit! <br>
   
   <input type="submit">
 </form>
+<hr>
+<% if (isAdmin) {%> 
+<h2>
+  You are the administrator of this game!
+</h2>
+<%} else {%> 
+  You are a regular player...
+<% } %>
 <%- include('bootfooter') -%>
