@@ -3,6 +3,29 @@
 <h1>
   Play the game
 </h1>
+
+<% if (isAdmin) {%> 
+<h4>
+  Admin Controls:
+</h4>
+<% players.forEach( x => {%> 
+  <hr>
+  
+  <form method="post" action="/sendPrivateMessage">
+    <%= x.username %>: <%= x.answer %>
+    <input type="hidden" name="user" value="<%= x.username %>">
+    <input type="hidden" name="gamePIN" value="<%= x.gamePIN %>">
+    message: <input type="text" name="privateMessage">
+    <input type="submit" value="send private message">
+  </form>
+   <!--  have a form for selecting a user as a detective, doctor, mafia -->
+<% }) %>
+
+<% } else { %>
+<h4>
+  Player Controls
+</h4>
+
 Type in your move and hit submit! <br>
 <%= new Date() %><br>
 <form method="post" action="/playingGame">
@@ -11,22 +34,15 @@ Type in your move and hit submit! <br>
   
   <input type="submit">
 </form>
+Admin message: <%= gameAnswer.messageFromAdmin %>
 <hr>
-<% if (isAdmin) {%> 
-<h4>
-  Administrator Controls:
-</h4>
-<% players.forEach( x => {%> 
-  <hr>
-  <%= x.username %>: <%= x.answer %>
-  <form method="post" action="/sendPrivateMessage">
-    <input type="hidden" name="user" value="<%= x.username %>">
-    <input type="hidden" name="gamePIN" value="<%= x.gamePIN %>">
-    message: <input type="text" name="privateMessage"><br>
-    <input type="submit">
+  <form method="post" action="/sendMessageToAdmin">
+    <input type="hidden" name="user" value="<%= gameAnswer.username %>">
+    <input type="hidden" name="gamePIN" value="<%= gameAnswer.gamePIN %>">
+    message: <input type="text" name="privateMessage">
+    <input type="submit" value="send message to admin">
   </form>
-   <!--  have a form for selecting a user as a detective, doctor, mafia -->
-<% }) %>
+<hr>
 
 <% } %>
 <%- include('bootfooter') -%>

@@ -8,7 +8,8 @@ var gameAnswerSchema = Schema( {
   gamePIN: String,
   username: String,
   answer: String,
-  messageFromAdmin: String
+  messageFromAdmin: String,
+  messageToAdmin: String,
 } );
 
 module.exports = mongoose.model( 'GameAnswerTeam0', gameAnswerSchema );

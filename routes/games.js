@@ -111,6 +111,7 @@ router.post('/playingGame', loggedIn,
         await gameAnswer.save()
         //console.log("created a new GameAnswer object")
       }
+      res.locals.gameAnswer = gameAnswer
       
       res.render('gamePlaying')
       
