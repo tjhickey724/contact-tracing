@@ -13,10 +13,20 @@ Type in your move and hit submit! <br>
 </form>
 <hr>
 <% if (isAdmin) {%> 
-<h2>
-  You are the administrator of this game!
-</h2>
-<%} else {%> 
-  You are a regular player...
+<h4>
+  Administrator Controls:
+</h4>
+<% players.forEach( x => {%> 
+  <hr>
+  <%= x.username %>: <%= x.answer %>
+  <form method="post" action="/sendPrivateMessage">
+    <input type="hidden" name="user" value="<%= x.username %>">
+    <input type="hidden" name="gamePIN" value="<%= x.gamePIN %>">
+    message: <input type="text" name="privateMessage"><br>
+    <input type="submit">
+  </form>
+   <!--  have a form for selecting a user as a detective, doctor, mafia -->
+<% }) %>
+
 <% } %>
 <%- include('bootfooter') -%>

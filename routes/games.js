@@ -60,8 +60,9 @@ router.post('/startGame',
                status:'start',
                state:'start',
                stage:0,
-               owner:res.locals.user.email,
+               owner:res.locals.user._id,
               })
+      await gameState.save()
       res.redirect('gameScreen/'+gamePIN)
     } catch(error){next(error)}
 })
@@ -87,13 +88,14 @@ router.post('/playingGame', loggedIn,
       const gamePIN = req.body.gamePIN
       res.locals.gamePIN = gamePIN
       const gameState = await GameState.findOne({gamePIN:gamePIN})
-      res.locals.isAdmin = (gameState.email == res.locals.user.email)
+      res.locals.isAdmin = (gameState.owner == res.locals.user._id)
       const answer = req.body.answer || "hello again"
       console.log(`in playingGame ${gamePIN} ${answer} ${res.locals.username}`)
       let gameAnswer = 
              await GameAnswer.findOne(
                {gamePIN:gamePIN, 
                 username:res.locals.username})
+      res.locals.players = await GameAnswer.find({gamePIN:gamePIN})
       if (gameAnswer){
         console.log("found an answer ...")
         //console.dir(gameAnswer)
