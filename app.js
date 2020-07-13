@@ -143,6 +143,7 @@ app.get('/forum',
 })
 
 app.post("/addToForum", 
+  isLoggedIn,
   async (req,res,next) => {
     try{
         const forumPost = 
@@ -150,8 +151,19 @@ app.post("/addToForum",
           {topic:req.body.topic,
            message: req.body.message,
            author: res.locals.username || "anonymous",
+           authorId: res.locals.user._id,
            date: new Date()})
         await forumPost.save()
+        res.redirect('/forum')     
+    }catch(error){next(error)}
+})
+
+app.get("/deleteForumPost/:postId", 
+ isLoggedIn,
+  async (req,res,next) => {
+    try{
+        const postId = req.params.postId
+        await forumPost.deleteOne({_id:postId}
         res.redirect('/forum')     
     }catch(error){next(error)}
 })
