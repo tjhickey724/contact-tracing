@@ -1,14 +1,15 @@
 <%- include('bootheader') -%>
 <%- include('menubar') -%>
 
-<form method="post" action="/addToForum">
+<form method="post" action="/updatePost">
+  <input type="hidden" name="postId" value="<%= post._id %> " >
   Topic: 
   <select name="topic">
-   <option <% if (post.topic=="school") {>% 
+   <option <% if (post.topic=="school") {%> 
               selected  
            <% }%>  >
      school</option>
-   <option <% if (post.topic=="home") {>% 
+   <option <% if (post.topic=="home") {%> 
               selected  
            <% }%> >
      home</option>

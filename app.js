@@ -178,6 +178,21 @@ app.get("/editForumPost/:postId",
     }catch(error){next(error)}
 })
 
+app.post("/updatePost", 
+ isLoggedIn,
+  async (req,res,next) => {
+    try{
+        const postId = req.body.postId
+        const post = await ForumPost.findOne({_id:postId})
+        //post.message = req.body.message
+        //post.topic = req.body.topic
+        //post._id = null
+        awai
+        await post.save()
+        res.redirect('/forum')     
+    }catch(error){next(error)}
+})
+
 app.get("/resetForum",
  isLoggedIn,
   async (req,res,next) => {
