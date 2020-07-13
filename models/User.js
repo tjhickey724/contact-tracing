@@ -10,4 +10,4 @@ var userSchema = Schema( {
   age: String
 } );
 
-module.exports = mongoose.model( 'UserTeam0', userSchema );
+module.exports = mongoose.model( 'UserTJH0', userSchema );

@@ -61,6 +61,7 @@ const auth = require('./routes/auth')
 app.use(auth)
 
 
+const Contact = require("./models/Contact")
 
 app.get("/", 
  isLoggedIn,
@@ -70,8 +71,6 @@ app.get("/",
       res.render('index')   
     } catch(error) {next(error)}
 })
-
-const Contact = require("./models/Contact")
 
 app.post('/addContact',
   isLoggedIn,
