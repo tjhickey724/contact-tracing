@@ -178,7 +178,6 @@ app.get("/editForumPost/:postId",
     }catch(error){next(error)}
 })
 
-const ObjectId = mongoose.Schema.Types.ObjectId
 
 app.post("/updatePost/:postId", 
  isLoggedIn,
