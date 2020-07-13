@@ -29,9 +29,9 @@
            <td><%= x.message %></td>  
            <td><%= x.date %></td> 
            <td><% if (user._id == x.authorId) {%> 
-             <a href="/deleteForumPost/<%= x._id %>">X</a>
+             <a href="/deleteForumPost/<%= x._id %>">X</a> or
+             <a href="/editForumPost/<%= x._id %>">Edit</a>
                <% } %>
-             <%= user._id %>  <%= x.authorId %>
            </td>
   </tr> 
 <% }) %>

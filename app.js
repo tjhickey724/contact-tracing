@@ -168,6 +168,16 @@ app.get("/deleteForumPost/:postId",
     }catch(error){next(error)}
 })
 
+app.get("/editForumPost/:postId", 
+ isLoggedIn,
+  async (req,res,next) => {
+    try{
+        const postId = req.params.postId
+        res.locals.post = await ForumPost.findOne({_id:postId})
+        res.render('editForumPost')     
+    }catch(error){next(error)}
+})
+
 app.get("/resetForum",
  isLoggedIn,
   async (req,res,next) => {
