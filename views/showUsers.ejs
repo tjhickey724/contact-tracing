@@ -1,0 +1,16 @@
+<%- include('bootheader') -%>
+<%- include('menubar') -%>
+<h1>
+  List of all users
+</h1>
+  <ol>
+    <% users.forEach(user => { %>
+      <li>
+        <a href="/showUser/<%= user._id %>">
+           <%= user.username %>
+        </a>
+      </li>
+    <% }) %>
+  </ol>
+
+<%- include('bootfooter') -%>

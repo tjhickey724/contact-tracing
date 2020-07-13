@@ -159,11 +159,34 @@ app.post("/addToForum",
 
 
 const User = require('./models/User')
+
+app.get('/showUsers.json', 
+  async (req,res,next) => {
+    try{
+      const users = await User.find() // finds list of all users
+      res.json(users)
+    } catch(error){
+      next(error)
+    }
+})
+
 app.get('/showUsers', 
   async (req,res,next) => {
     try{
-      const users = await User.find()
-      res.json(users)
+      res.locals.users = await User.find() // finds list of all users
+      res.render('showUsers')
+    } catch(error){
+      next(error)
+    }
+})
+
+app.get('/showUser/:userId', 
+  async (req,res,next) => {
+    try{
+      const userId = req.params.userId
+      res.locals.theUser = await User.findOne({_id:userId}) // find one user
+      res.json(res.locals.theUser)
+      //res.render('showUser')
     } catch(error){
       next(error)
     }
