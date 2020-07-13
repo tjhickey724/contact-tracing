@@ -187,6 +187,7 @@ app.post("/updatePost/:postId",
         const post = await ForumPost.findOne({_id:postId})
         post.message = req.body.message
         post.topic = req.body.topic
+        //post.date = new Date()
        
         await post.save()
         res.redirect('/forum')     
