@@ -62,14 +62,14 @@ app.use(auth)
 
 
 
-app.get("/", (req, res, next) => {
+app.get("/", 
  isLoggedIn,
   async (req,res,next) => {
     try {
-      const contacts = await Contact.find({userId:res.locals.user._id})
+      res.locals.contacts = await Contact.find({userId:res.locals.user._id})
       res.render('index')   
     } catch(error) {next(error)}
-}})
+})
 
 const Contact = require("./models/Contact")
 

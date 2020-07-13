@@ -19,23 +19,27 @@
   Who did you make contact with?
   <input type="text" name="who"> <br>
   For how long did you meet with them?
-  <input type="text" name="howlong"> <br>
+  <input type="text" name="howLong"> <br>
   Description of meeting:
   <input type="text" name="description"><br>
   <input type="submit" value="store contact">
 </form>
 
-   <% contact.forEach(contact => {%>
-     <%= contact.who %> <%= contact.howLong %> <%= contact.where %> <br>
-     <%= contact.description %>
-     <hr>
 
-   <% }) %>
+
 
 <% } else {%>  
    You must login to use the Contact Tracing App 
 <%  } %>
 
+   <% contacts.forEach(contact => {%>
+     <%= contact.when %> <br>
+     <%= contact.who %> <br>
+     <%= contact.howLong %> <br>
+     <%= contact.where %> <br>
+     <%= contact.description %>
+     <hr>
 
+   <% }) %>
 
 <%- include('bootfooter') -%>
