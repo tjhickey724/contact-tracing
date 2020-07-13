@@ -1,8 +1,7 @@
 <%- include('bootheader') -%>
 <%- include('menubar') -%>
 
-<form method="post" action="/updatePost">
-  <input type="hidden" name="postId" value="<%= post._id %> " >
+<form method="post" action="/updatePost/<%= post._id %>">
   Topic: 
   <select name="topic">
    <option <% if (post.topic=="school") {%> 

@@ -180,17 +180,16 @@ app.get("/editForumPost/:postId",
 
 const ObjectId = mongoose.Schema.Types.ObjectId
 
-app.post("/updatePost", 
+app.post("/updatePost/:postId", 
  isLoggedIn,
   async (req,res,next) => {
     try{
-        const postId = req.body.postId
-        const post = await ForumPost.findOne({_id:ObjectId(postId)})
-        //post.message = req.body.message
-        //post.topic = req.body.topic
-        //post._id = null
+        const postId = req.params.postId
+        const post = await ForumPost.findOne({_id:postId})
+        post.message = req.body.message
+        post.topic = req.body.topic
        
-        //await post.save()
+        await post.save()
         res.redirect('/forum')     
     }catch(error){next(error)}
 })
