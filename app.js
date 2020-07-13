@@ -178,17 +178,19 @@ app.get("/editForumPost/:postId",
     }catch(error){next(error)}
 })
 
+const ObjectId = mongoose.Schema.Types.ObjectId
+
 app.post("/updatePost", 
  isLoggedIn,
   async (req,res,next) => {
     try{
         const postId = req.body.postId
-        const post = await ForumPost.findOne({_id:postId})
+        const post = await ForumPost.findOne({_id:ObjectId(postId)})
         //post.message = req.body.message
         //post.topic = req.body.topic
         //post._id = null
-        awai
-        await post.save()
+       
+        //await post.save()
         res.redirect('/forum')     
     }catch(error){next(error)}
 })
