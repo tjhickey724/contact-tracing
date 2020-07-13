@@ -8,6 +8,7 @@ const schema = Schema( {
   who: String,
   howLong: String,
   description: String,
+  userId: Schema.Types.ObjectId
 
 } );
 

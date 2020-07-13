@@ -9,6 +9,25 @@
       data, where, who, howlong, description 
   and send to /addContact -->
 
+<% if (loggedIn) {%>  
+<h2>
+  Enter your contact info here ...
+</h2>
+<form method="post" action="/addContact">
+  Where did you make contact?
+  <input type="text" name="where"> <br>
+  Who did you make contact with?
+  <input type="text" name="who"> <br>
+  For how long did you meet with them?
+  <input type="text" name="howlong"> <br>
+  Description of meeting:
+  <input type="text" name="description"><br>
+  <input type="submit" value="store contact">
+</form>
+<% } else {%>  
+   You must login to use the Contact Tracing App 
+<%  } %>
+
 
 
 <%- include('bootfooter') -%>

@@ -72,6 +72,25 @@ app.get("/", (req, res, next) => {
   res.render("index");
 });
 
+const Contact = require("./models/Contact")
+
+app.post('/addContact',
+  isLoggedIn,
+  async (req,res,next) => {
+    try {
+      const contact = new Contact(
+         {when: new Date(),
+          where: req.body.where,
+          howLong: req.body.howLong,
+          description: req.body.description,
+          who: req.body.who,
+          userId: res.locals.user._id
+         })
+      await contact.save()
+      res.redirect('/')   
+    } catch(error) {next(error)}
+})
+
 app.get("/time", (req,res,next) => {
   res.send("The time is now!")
 })
