@@ -24,6 +24,14 @@
   <input type="text" name="description"><br>
   <input type="submit" value="store contact">
 </form>
+
+   <% contact.forEach(contact => {%>
+     <%= contact.who %> <%= contact.howLong %> <%= contact.where %> <br>
+     <%= contact.description %>
+     <hr>
+
+   <% }) %>
+
 <% } else {%>  
    You must login to use the Contact Tracing App 
 <%  } %>

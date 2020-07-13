@@ -60,17 +60,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const auth = require('./routes/auth')
 app.use(auth)
 
-const recipes = require('./routes/recipes')
-app.use(recipes)
-
-const games = require('./routes/games')
-app.use(games)
-
 
 
 app.get("/", (req, res, next) => {
-  res.render("index");
-});
+ isLoggedIn,
+  async (req,res,next) => {
+    try {
+      const contacts = await Contact.find({userId:res.locals.user._id})
+      res.render('index')   
+    } catch(error) {next(error)}
+}})
 
 const Contact = require("./models/Contact")
 
@@ -89,186 +88,6 @@ app.post('/addContact',
       await contact.save()
       res.redirect('/')   
     } catch(error) {next(error)}
-})
-
-app.get("/time", (req,res,next) => {
-  res.send("The time is now!")
-})
-
-app.get("/gohome", (req,res,next) => {
-  res.redirect('/')
-})
-
-app.get("/jtime", (req,res,next) => {
-  const now = new Date()
-  res.json(now)
-})
-
-app.get("/aboutPage", (req,res,next) => {
-  res.render("about")
-})
-
-app.get("/greeting/:name", (req,res,next) => {
-  const nombre = req.params.name
-  res.send("hello "+nombre)
-})
-
-app.get("/testing/:year", (req,res,next) => {
-  const yearNumber = req.params.year
-  res.send(yearNumber + " was a memorable year!")
-})
-
-app.get("/bio/tim", (req,res,next) => {
-  res.render("tim")
-})
-
-
-
-
-app.get("/demo", (request, response) => {
-  response.locals.message = "Welcome to the Demo page. I am a message!"
-  response.locals.magicNumber = 24
-  
-  response.render("demo");
-});
-
-let forumPosts = [ 
-  {topic:'school',message:'working on project',username:'tim',date:new Date()},
-  {topic:'home',message:'better sleep well tonight',username:'tim',date:new Date()}
-]
-/*
-app.get('/forum', (req,res) => {
-  res.locals.posts = forumPosts.reverse()
-  res.render('forum')
-})
-
-app.post("/addToForum", (req,res) => {
-  req.body.date = new Date()
-  req.body.username = res.locals.username
-  forumPosts = forumPosts.concat(req.body)
-  res.redirect('/forum')
-  //res.json(forumPosts)
-})
-*/
-
-const ForumPost = require("./models/ForumPost")
-
-app.get('/forum', 
-  async (req,res,next) => {
-   try{
-      res.locals.posts = await ForumPost.find().sort({date:-1}).limit(5)
-      res.render('forum')   
-   } catch(error) {next(error)}
-})
-
-app.post("/addToForum", 
-  isLoggedIn,
-  async (req,res,next) => {
-    try{
-        const forumPost = 
-        new ForumPost(
-          {topic:req.body.topic,
-           message: req.body.message,
-           author: res.locals.username || "anonymous",
-           authorId: res.locals.user._id,
-           date: new Date()})
-        await forumPost.save()
-        res.redirect('/forum')     
-    }catch(error){next(error)}
-})
-
-app.get("/deleteForumPost/:postId", 
- isLoggedIn,
-  async (req,res,next) => {
-    try{
-        const postId = req.params.postId
-        await ForumPost.deleteOne({_id:postId})
-        res.redirect('/forum')     
-    }catch(error){next(error)}
-})
-
-app.get("/editForumPost/:postId", 
- isLoggedIn,
-  async (req,res,next) => {
-    try{
-        const postId = req.params.postId
-        res.locals.post = await ForumPost.findOne({_id:postId})
-        res.render('editForumPost')     
-    }catch(error){next(error)}
-})
-
-
-app.post("/updatePost/:postId", 
- isLoggedIn,
-  async (req,res,next) => {
-    try{
-        const postId = req.params.postId
-        const post = await ForumPost.findOne({_id:postId})
-        post.message = req.body.message
-        post.topic = req.body.topic
-        //post.date = new Date()
-       
-        await post.save()
-        res.redirect('/forum')     
-    }catch(error){next(error)}
-})
-
-app.get("/resetForum",
- isLoggedIn,
-  async (req,res,next) => {
-    try{
-        const postId = req.params.postId
-        await ForumPost.deleteMany({})
-        res.redirect('/forum')     
-    }catch(error){next(error)}
-})
-
-
-const User = require('./models/User')
-
-app.get('/showUsers.json', 
-  async (req,res,next) => {
-    try{
-      const users = await User.find() // finds list of all users
-      res.json(users)
-    } catch(error){
-      next(error)
-    }
-})
-
-app.get('/showUsers', 
-  async (req,res,next) => {
-    try{
-      res.locals.users = await User.find() // finds list of all users
-      res.render('showUsers')
-    } catch(error){
-      next(error)
-    }
-})
-
-app.get('/showUser/:userId', 
-  async (req,res,next) => {
-    try{
-      const userId = req.params.userId
-      res.locals.theUser = await User.findOne({_id:userId}) // find one user
-      res.json(res.locals.theUser)
-      //res.render('showUser')
-    } catch(error){
-      next(error)
-    }
-})
-
-
-
-
-app.get("/about", (req, res) => {
-  res.render("about");
-});
-
-
-app.get('/showformdata', (request,response) => {
-  const data = request.body
-  response.json(data)
 })
 
 
