@@ -163,11 +163,20 @@ app.get("/deleteForumPost/:postId",
   async (req,res,next) => {
     try{
         const postId = req.params.postId
-        await forumPost.deleteOne({_id:postId}
+        await ForumPost.deleteOne({_id:postId})
         res.redirect('/forum')     
     }catch(error){next(error)}
 })
 
+app.get("/resetForum",
+ isLoggedIn,
+  async (req,res,next) => {
+    try{
+        const postId = req.params.postId
+        await ForumPost.deleteMany({})
+        res.redirect('/forum')     
+    }catch(error){next(error)}
+})
 
 
 const User = require('./models/User')
