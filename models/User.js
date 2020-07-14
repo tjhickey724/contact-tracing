@@ -9,6 +9,7 @@ var userSchema = Schema( {
   googletoken: String,
   googlename:String,
   googleemail:String,
+  
   username: String,
   passphrase: String,
   age: String
