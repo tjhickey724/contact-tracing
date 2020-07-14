@@ -153,6 +153,7 @@ router.use((req,res,next) => {
   res.locals.loggedIn = false
   if (req.isAuthenticated()){
       res.locals.user = req.user
+      res.locals.username = req.user.googleemail
       res.locals.loggedIn = true
     }
   else {
@@ -204,6 +205,7 @@ function isLoggedIn(req, res, next) {
     res.locals.loggedIn = false
     if (req.isAuthenticated()){
       res.locals.loggedIn = true
+      res.locals.username = res.locals.user.googleemail
       return next();
     } else {
       res.redirect('/login');

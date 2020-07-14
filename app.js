@@ -57,7 +57,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // here we handle some routes in their own routing file
 // this keeps the main app.js more organized ...
-const auth = require('./routes/auth')
+const auth = require('./routes/googleAuth')
 app.use(auth)
 
 

@@ -11,7 +11,7 @@
 
 <% if (loggedIn) {%>  
 <h2>
-  Enter your contact info here ...
+  Enter your contact info here <%= user.googlename %>/<%= user.googleemail %>
 </h2>
 <form method="post" action="/addContact">
   Where did you make contact?
@@ -33,12 +33,14 @@
 <%  } %>
 
    <% contacts.forEach(contact => {%>
+   <div style="">
+    
      <%= contact.when %> <br>
      <%= contact.who %> <br>
      <%= contact.howLong %> <br>
      <%= contact.where %> <br>
      <%= contact.description %>
-     <hr>
+   </div>
 
    <% }) %>
 

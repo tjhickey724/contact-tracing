@@ -11,17 +11,6 @@
         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
 
-      <li class="nav-item">
-        <a class="nav-link" href="/demo">Demo</a>
-      </li>
-      
-      <li class="nav-item">
-        <a class="nav-link" href="/about">About</a>
-      </li>
-      
-      <li class="nav-item">
-        <a class="nav-link" href="/forum">forum</a>
-      </li>
       
       <% if (!loggedIn) {%>
       <li class="nav-item">
@@ -30,12 +19,6 @@
       <% } else { %>
         <li class="nav-item">
           <a class="nav-link" href="/logout">Logout <%= username %></a>
-        </li>
-      <li class="nav-item">
-          <a class="nav-link" href="/startGame">startGame <%= username %></a>
-        </li>
-      <li class="nav-item">
-          <a class="nav-link" href="/playGame">playGame <%= username %></a>
         </li>
       <% } %>
 
