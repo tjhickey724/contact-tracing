@@ -90,6 +90,17 @@ app.post('/addContact',
     } catch(error) {next(error)}
 })
 
+const User = require('./models/User')
+
+app.get('/profile',
+ isLoggedIn,
+  async (req,res,next) => {
+    try {
+      res.locals.user = await new User({_id:res.locals.user._id})
+
+      res.render("profile")   
+    } catch(error) {next(error)}
+})
 
 
 // Don't change anything below here ...
