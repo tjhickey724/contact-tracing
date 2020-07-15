@@ -12,15 +12,18 @@
 <% if (loggedIn) {%>  
 <h2>
   Update your Profile information here <br>
-  <%= user.googlename %>/<%= user.googleemail %>
+  
 </h2>
+Name: <%= user.googlename %><br>
+Email: <%= user.googleemail %><br>
 <form method="post" action="/profile">
   imageURL <input type="text" name="imageURL" value="<%= user.imageURL || "/images/dog.jpg" %> "> <br>
+  <img src="<%= user.imageURL || "/images/dog.jpg" %>" alt="photo of user" width="200"><br>
   age <input type="number" name="age" value="<%= user.age || 0 %>"> <br>
   <input type="submit">
 </form>
 <h3>
-  User
+  Here is your use document as stored in the database:
 </h3>
 <pre>
   <%= JSON.stringify(user,null,2)  %>

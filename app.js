@@ -102,6 +102,19 @@ app.get('/profile',
     } catch(error) {next(error)}
 })
 
+app.post('/profile',
+ isLoggedIn,
+  async (req,res,next) => {
+    try {
+      const user = await User.findOne({_id:res.locals.user._id})
+      user.age = req.body.age
+      user.imageURL = req.body.imageURL
+      await user.save()
+      res.locals.user = user
+      res.render("profile")   
+    } catch(error) {next(error)}
+})
+
 
 // Don't change anything below here ...
 
