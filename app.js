@@ -1,5 +1,6 @@
 /*
   app.js -- This creates an Express webserver
+  for contact tracing
 */
 
 // First we load in all of the packages we need for the server...
@@ -64,12 +65,12 @@ app.use(auth)
 
 const Contact = require("./models/Contact")
 
-app.get("/", 
+app.get("/",
  isLoggedIn,
   async (req,res,next) => {
     try {
       res.locals.contacts = await Contact.find({userId:res.locals.user._id})
-      res.render('index')   
+      res.render('index')
     } catch(error) {next(error)}
 })
 
@@ -86,7 +87,7 @@ app.post('/addContact',
           userId: res.locals.user._id
          })
       await contact.save()
-      res.redirect('/')   
+      res.redirect('/')
     } catch(error) {next(error)}
 })
 
@@ -98,7 +99,7 @@ app.get('/profile',
     try {
       res.locals.user = await User.findOne({_id:res.locals.user._id})
 
-      res.render("profile")   
+      res.render("profile")
     } catch(error) {next(error)}
 })
 
@@ -111,7 +112,7 @@ app.post('/profile',
       user.imageURL = req.body.imageURL
       await user.save()
       res.locals.user = user
-      res.render("profile")   
+      res.render("profile")
     } catch(error) {next(error)}
 })
 
