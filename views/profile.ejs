@@ -19,6 +19,12 @@
   age <input type="number" name="age" value="<%= user.age || 0 %>"> <br>
   <input type="submit">
 </form>
+<h3>
+  User
+</h3>
+<pre>
+  <%= JSON.stringify(user,null,2)  %>
+</pre>
 
 <% } else {%>  
    You must login to use the Contact Tracing App 

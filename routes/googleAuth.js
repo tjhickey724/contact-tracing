@@ -155,6 +155,8 @@ router.use((req,res,next) => {
       res.locals.user = req.user
       res.locals.username = req.user.googleemail
       res.locals.loggedIn = true
+      console.log("in Authentication Demo")
+      console.log(JSON.stringify(req.user,null,2))
     }
   else {
     res.locals.loggedIn = false

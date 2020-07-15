@@ -96,7 +96,7 @@ app.get('/profile',
  isLoggedIn,
   async (req,res,next) => {
     try {
-      res.locals.user = await new User({_id:res.locals.user._id})
+      res.locals.user = await User.findOne({_id:res.locals.user._id})
 
       res.render("profile")   
     } catch(error) {next(error)}
