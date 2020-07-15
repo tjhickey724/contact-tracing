@@ -1,0 +1,27 @@
+<%- include('bootheader') -%>
+<%- include('menubar') -%>
+    <div class="jumbotron">
+        <h1>Contact Tracing App 2020</h1>
+        <p>Help remember who you were with and when and where</p>
+    </div>
+
+<!--  Need a form to get 
+      data, where, who, howlong, description 
+  and send to /addContact -->
+
+<% if (loggedIn) {%>  
+<h2>
+  Update your Profile information here <br>
+  <%= user.googlename %>/<%= user.googleemail %>
+</h2>
+<form method="post" action="/profile">
+  imageURL <input type="text" name="imageURL" value="<%= user.imageURL || "/images/dog.jpg" %> "> <br>
+  age <input type="number" name="age" value="<%= user.age || 0 %>"> <br>
+  <input type="submit">
+</form>
+
+<% } else {%>  
+   You must login to use the Contact Tracing App 
+<%  } %>
+
+<%- include('bootfooter') -%>
